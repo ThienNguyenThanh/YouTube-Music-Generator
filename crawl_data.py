@@ -11,7 +11,7 @@ yt = YouTube('http://youtube.com/watch?v=2lAe1cqCOXo')
 # print(yt.streams.filter(only_audio=True))
 
 down_stream = yt.streams.get_by_itag(140)
-down_stream.download(timeout=60)
+down_stream.download()
 
 
 # video_title = "YouTube Rewind 2019: For the Record | #YouTubeRewind"

@@ -1,1 +1,1 @@
-# AI generating music tool
+# AI generate music tool
