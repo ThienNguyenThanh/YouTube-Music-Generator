@@ -1,23 +1,29 @@
 import ssl
+import ffmpeg
+import os
+
 
 from pytube import YouTube
 
-# from vctube import VCtube
-
-ssl._create_default_https_context = ssl._create_unverified_context
-
-yt = YouTube('http://youtube.com/watch?v=2lAe1cqCOXo')
-
-# print(yt.streams.filter(only_audio=True))
-
-down_stream = yt.streams.get_by_itag(140)
-down_stream.download()
+# FOR MACOS ONLY
+# ssl._create_default_https_context = ssl._create_unverified_context
 
 
-# video_title = "YouTube Rewind 2019: For the Record | #YouTubeRewind"
-# video_url = "http://youtube.com/watch?v=2lAe1cqCOXo"
-# lang = "en"
+# Downloading YouTube video
+yt = YouTube('https://www.youtube.com/watch?v=5NV6Rdv1a3I')
 
-# vc = VCtube(video_title, video_url, lang)
 
-# vc.download_audio()
+# result = yt.streams.filter(only_audio=True)
+# for i in result:print(i)
+
+
+down_stream = yt.streams.get_by_itag(139)
+down_stream.download(filename="video1.mp3")
+
+
+# Modify bitrate with ffmpeg
+# vid_input = ffmpeg.probe('video1.mp3')
+# curr_bit_rate = next((s for s in vid_input['streams'] if s['codec_type'] == 'audio'),None)['bit_rate'])
+
+
+
