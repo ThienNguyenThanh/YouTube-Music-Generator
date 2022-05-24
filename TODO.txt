@@ -1,0 +1,2 @@
+Task 24/5 (DDL 26/5)
+- Write crawl data function and store result in csv file (Dat, Thien) 
