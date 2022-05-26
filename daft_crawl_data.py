@@ -29,11 +29,13 @@ while True:
     try:
         video_url = next(list_video_urls)
         video_info['url'].append(video_url)
-        # video = YouTube(video_url)
-        # id_tag = video.streams.filter(only_audio=True)[0]
-        # down_stream = video.streams.get_by_itag(id_tag.itag)
-        # out_file_name = "".join("video" + str(i)+".mp4")
-        # down_stream.download(filename=out_file_name)
+        video = YouTube(video_url)
+
+        # Filter audio stream only!
+        id_tag = video.streams.filter(only_audio=True)[0]         # use the stream has lowest bitrate !!!
+        down_stream = video.streams.get_by_itag(id_tag.itag)          
+        out_file_name = "".join("video" + str(i)+".mp4")
+        down_stream.download(filename=out_file_name)
         i +=1
     except StopIteration:
         break
@@ -42,6 +44,8 @@ print(f"Total time: {start_time - time.time()}")
 
 # Export to csv file
 # pd.DataFrame.from_dict(video_info).to_csv(r'test.csv', index=False, header=True)
+
+
 
 # Modify bitrate with ffmpeg
 # vid_input = ffmpeg.probe('video1.mp3')
