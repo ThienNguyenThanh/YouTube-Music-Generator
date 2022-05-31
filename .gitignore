@@ -2,3 +2,7 @@ env
 # ignored folder 
 /dataset
 /metadatacsv
+
+.DS_Store
+.ipynb_checkpoints
+
