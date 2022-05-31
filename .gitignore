@@ -3,6 +3,6 @@ env
 /dataset
 /metadatacsv
 
-.DS_Store
-.ipynb_checkpoints
+**/.DS_Store
+**/.ipynb_checkpoints
 
