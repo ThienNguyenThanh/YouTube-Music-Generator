@@ -1,1 +1,4 @@
 env
+# ignored folder 
+/dataset
+/metadatacsv
