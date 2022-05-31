@@ -1,9 +1,8 @@
 import os
-from re import T
 import ssl
 import time
-import pandas as pd
 
+import pandas as pd
 # import ffmpeg
 import pytube
 from pytube import YouTube
@@ -16,8 +15,8 @@ start_time = time.time()
 
 # Get list YouTube video of specific YouTube channel
 list_video_urls = ( pytube.contrib
-                          .channel
-                          .Channel('https://www.youtube.com/channel/UCdjQPbF_Wk02mvqqQhWxwPw/videos')
+                          .playlist
+                          .Playlist('https://www.youtube.com/playlist?list=PLzZfeWyGFlb8iBee7i6-RRjBT7SxjT5-0')
                           .url_generator() )
 
 video_info = {}
@@ -31,12 +30,17 @@ while True:
         video_info['url'].append(video_url)
         video = YouTube(video_url)
 
-        # Filter audio stream only!
-        id_tag = video.streams.filter(only_audio=True)[0]         # use the stream has lowest bitrate !!!
-        down_stream = video.streams.get_by_itag(id_tag.itag)          
-        out_file_name = "".join("video" + str(i)+".mp4")
-        down_stream.download(filename=out_file_name)
-        i +=1
+        if video.length < 600:   # Only takes audio smaller 10 minutes.
+
+            # Filter audio stream only!
+            id_tag = video.streams.filter(only_audio=True)[0]         # use the stream has lowest bitrate !!!
+            down_stream = video.streams.get_by_itag(id_tag.itag)   
+
+            down_audio_title = video.title.replace('/','')       # Remove '/' character in audio title.
+
+            out_file_name = "".join(down_audio_title+".wav")
+            down_stream.download( output_path="./dataset",filename=out_file_name)
+            i +=1
     except StopIteration:
         break
 
